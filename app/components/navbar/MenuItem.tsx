@@ -1,0 +1,19 @@
+"use client";
+
+interface MenuItempProps {
+  onClick: () => void;
+  label: string;
+}
+
+const MenuItem: React.FC<MenuItempProps> = ({ onClick, label }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="px-5 py-3 hover:bg-neutral-100 transition font-semibold"
+    >
+      {label}
+    </div>
+  );
+};
+
+export default MenuItem;
