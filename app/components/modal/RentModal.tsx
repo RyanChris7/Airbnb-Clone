@@ -226,7 +226,7 @@ const RentModal = () => {
           required
         />
         <Input
-          id="Description"
+          id="description"
           label="Description"
           errors={errors}
           register={register}
