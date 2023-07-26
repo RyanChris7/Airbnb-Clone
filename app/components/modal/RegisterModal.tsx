@@ -8,13 +8,12 @@ import Button from "../navbar/Buttton";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { signIn } from "next-auth/react";
 
 import userRegisterModal from "@/app/hooks/useRegisterModal";
-import LoginModal from "./LoginModal";
 import userLoginModal from "@/app/hooks/useLoginModal";
 
 const RegisterModal = () => {
@@ -40,6 +39,7 @@ const RegisterModal = () => {
     axios
       .post("/api/register", data)
       .then(() => {
+        toast.success("Create Account Successful!");
         registerModal.onClose();
         loginModal.onOpen();
       })

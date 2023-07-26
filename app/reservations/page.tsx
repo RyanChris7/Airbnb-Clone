@@ -8,10 +8,12 @@ const ReservationPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    <EmptyState
-      title="Unauthorized Operations"
-      subtitle="Please login to an account"
-    />;
+    return (
+      <EmptyState
+        title="Unauthorized Operations"
+        subtitle="Please login to an account"
+      />
+    );
   }
 
   const reservations = await getReservations({
@@ -19,10 +21,12 @@ const ReservationPage = async () => {
   });
 
   if (reservations.length == 0) {
-    <EmptyState
-      title="No Reservation Found"
-      subtitle="No reservations on your property"
-    />;
+    return (
+      <EmptyState
+        title="No Reservation Found"
+        subtitle="No reservations on your property"
+      />
+    );
   }
 
   return (
