@@ -1,10 +1,15 @@
 "use client";
 
+import useSearchModal from "@/app/hooks/useSearchModal";
 import { BiSearch } from "react-icons/bi";
 
 const Search = () => {
+  const searchModal = useSearchModal();
   return (
-    <div className="border-[1px] ml-20 mb:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer">
+    <div
+      className="border-[1px] ml-20 mb:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+      onClick={searchModal.onOpen}
+    >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">Anywhere</div>
         <div className="hidden sm:block text-sm font-semibold px-6 flex-1 border-x-[1px] flex-center">
