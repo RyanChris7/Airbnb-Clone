@@ -1,6 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 
-export interface IListingParams {
+export interface IListingsParams {
   userId?: string;
   guestCount?: number;
   roomCount?: number;
@@ -11,22 +11,21 @@ export interface IListingParams {
   category?: string;
 }
 
-export default async function getListings(params: IListingParams) {
+export default async function getListings(params: IListingsParams) {
   try {
     const {
       userId,
       roomCount,
       guestCount,
       bathroomCount,
+      locationValue,
       startDate,
       endDate,
-      locationValue,
       category,
     } = params;
 
     let query: any = {};
 
-    //filter logic
     if (userId) {
       query.userId = userId;
     }
@@ -41,15 +40,15 @@ export default async function getListings(params: IListingParams) {
       };
     }
 
-    if (bathroomCount) {
-      query.bathroomCount = {
-        gte: +bathroomCount,
-      };
-    }
-
     if (guestCount) {
       query.guestCount = {
         gte: +guestCount,
+      };
+    }
+
+    if (bathroomCount) {
+      query.bathroomCount = {
+        gte: +bathroomCount,
       };
     }
 
@@ -59,17 +58,19 @@ export default async function getListings(params: IListingParams) {
 
     if (startDate && endDate) {
       query.NOT = {
-        some: {
-          OR: [
-            {
-              startDate: { gte: startDate },
-              endDate: { lte: startDate },
-            },
-            {
-              startDate: { lte: endDate },
-              endDate: { gte: endDate },
-            },
-          ],
+        reservations: {
+          some: {
+            OR: [
+              {
+                endDate: { gte: startDate },
+                startDate: { lte: startDate },
+              },
+              {
+                startDate: { lte: endDate },
+                endDate: { gte: endDate },
+              },
+            ],
+          },
         },
       };
     }
