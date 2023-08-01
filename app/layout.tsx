@@ -10,7 +10,7 @@ import RentModal from "./components/modal/RentModal";
 import SearchModal from "./components/modal/SearchModal";
 
 export const metadata = {
-  title: "Airbnb",
+  title: "Project Rent Model Ryan",
   description: "Airbnb Clone Project",
 };
 
